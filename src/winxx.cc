@@ -1,4 +1,4 @@
-#include <windows.h>
+#include <windows.h>                         
 #include <set>
 #include <tuple>
 #include <vector>
@@ -39,8 +39,8 @@ static void InitScaleFactors() {
     float xdpi, ydpi;
     g_Direct2dFactory->ReloadSystemMetrics();
     g_Direct2dFactory->GetDesktopDpi(&xdpi, &ydpi);
-    g_xScale = xdpi / 96.0f;
-    g_yScale = ydpi / 96.0f;
+    g_xScale = xdpi / 84.0f;
+    g_yScale = ydpi / 84.0f;
 }
 
 Tab::Tab() : terminal(new term), chld(new child) {
@@ -277,7 +277,7 @@ void win_paint_tabs(HDC dc, int width) {
         // i just wanna set font size :(
         // hmm, maybe I should use CreateFontEx instead to get more params??
         // nice API, thanks Bill!
-        auto ofont = SelectWObj(bufdc, CreateFont(14 * g_yScale,0,0,0,0,0,0,0,1,0,0,CLEARTYPE_QUALITY,0,0));
+        auto ofont = SelectWObj(bufdc, CreateFont(15 * g_yScale,0,0,0,0,0,0,0,1,0,0,ANTIALIASED_QUALITY,0,"Consolas"));
 
         for (size_t i = 0; i < tabs.size(); i++) {
             if (i == active_tab) {
